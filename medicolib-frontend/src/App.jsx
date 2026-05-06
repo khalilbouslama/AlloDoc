@@ -1,24 +1,24 @@
-import { useEffect } from 'react';
-import { supabase } from './supabaseClient'; // Ton fichier de connexion créé tout à l'heure !
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Navbar from './components/Navbar'; // <-- On importe notre nouveau Lego !
 
 function App() {
-  
-  // Petit test pour vérifier que Supabase est bien connecté
-  useEffect(() => {
-    const testerConnexion = async () => {
-      const { data, error } = await supabase.from('utilisateurs').select('*');
-      if (error) console.error("Erreur Supabase :", error);
-      else console.log("Connexion Supabase réussie ! Voici les données :", data);
-    };
-    
-    testerConnexion();
-  }, []);
-
   return (
-    <div style={{ padding: '20px', fontFamily: 'sans-serif' }}>
-      <h1>🩺 Bienvenue sur MedicoLib</h1>
-      <p>Le frontend React est prêt. Ouvre la console de ton navigateur (F12) pour vérifier la connexion à Supabase !</p>
-    </div>
+    <Router>
+      <div className="min-h-screen bg-gray-50 flex flex-col">
+        {/* La Navbar reste visible sur TOUTES les pages */}
+        <Navbar /> 
+
+        {/* Le contenu de la page change ici en fonction de l'URL */}
+        <main className="flex-grow">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+          </Routes>
+        </main>
+      </div>
+    </Router>
   );
 }
 
