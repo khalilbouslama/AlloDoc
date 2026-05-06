@@ -1,16 +1,55 @@
-# React + Vite
+📄 Cahier des Charges - MedicoLib (Phase MVP)
+1. Vision du Projet
+MedicoLib est une plateforme web de mise en relation médicale permettant aux patients de trouver un praticien et de prendre rendez-vous facilement, et aux médecins de gérer leur agenda et le suivi de leurs consultations.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Objectif du MVP : Prouver la viabilité technique et fonctionnelle du parcours de prise de rendez-vous avec un système robuste et rapide.
 
-Currently, two official plugins are available:
+2. Utilisateurs Cibles (Les Rôles)
+🧑‍⚕️ Le Médecin : Doit pouvoir configurer ses disponibilités, consulter son planning du jour, et ajouter des notes/documents liés à une consultation.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+🤒 Le Patient : Doit pouvoir rechercher un médecin (par spécialité/ville), voir ses créneaux libres, réserver, et consulter son historique.
 
-## React Compiler
+3. Périmètre Fonctionnel (Ce qu'on code maintenant)
+Authentification :
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Création de compte et connexion sécurisée (Email / Mot de passe).
 
-## Expanding the ESLint configuration
+Redirection automatique vers le bon tableau de bord selon le rôle (Patient ou Médecin).
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Côté Patient :
+
+Page de recherche de médecins (avec filtres simples).
+
+Affichage du profil d'un médecin avec son calendrier de disponibilités.
+
+Prise de rendez-vous (et annulation si besoin).
+
+Côté Médecin :
+
+Tableau de bord de l'agenda (vue jour/semaine).
+
+Création de créneaux de disponibilité horaires.
+
+Possibilité de modifier le statut d'un RDV (Terminé, Annulé) et de rédiger une note privée.
+
+4. Stack Technique et Architecture
+Frontend : React (via Vite) pour une interface ultra-rapide.
+
+Design System : Tailwind CSS + composants UI (ex: React-Calendar, Lucide Icons).
+
+Backend / Base de données : Supabase (PostgreSQL).
+
+Gestion d'état (State) : React Context API (pour la gestion de l'utilisateur connecté).
+
+Hébergement prévu : Vercel ou Netlify (Frontend) / Supabase Cloud (Backend).
+
+5. Hors Périmètre MVP (Reporté à la V2) 🛑
+(Ces éléments sont gardés en tête pour l'architecture future, mais ne bloqueront pas la sortie de la première version).
+
+Architecture Cloud Enterprise : API Gateway (Kong/AWS), WAF dédié, HashiCorp Vault.
+
+Paiement en ligne des consultations (Stripe).
+
+Téléconsultation vidéo.
+
+Chiffrement de bout-en-bout strict côté client pour obtenir la certification HDS (Hébergeur de Données de Santé).
